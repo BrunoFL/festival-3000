@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   id="svg102"
+   sodipodi:docname="letterTiles_vector (3e copie).svg"
+   width="128"
+   height="128"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview104"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.5862762"
+     inkscape:cx="256.89095"
+     inkscape:cy="75.333664"
+     inkscape:window-width="1850"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg102" />
+  <defs
+     id="defs2" />
+  <path
+     stroke="none"
+     fill="#6a7279"
+     d="M 122.5,2 H 5.55 Q 2,2 2,5.5 v 117 Q 2,126 5.55,126 H 122.5 q 3.5,0 3.5,-3.5 V 5.5 Q 126,2 122.5,2 M 5.55,0 H 122.5 q 5.5,0 5.5,5.5 v 117 q 0,5.5 -5.5,5.5 H 5.55 Q 0,128 0,122.5 V 5.5 Q 0,0 5.55,0"
+     id="path32" />
+  <path
+     stroke="none"
+     fill="#454a4f"
+     d="m 122.5,2 q 3.5,0 3.5,3.5 v 117 q 0,3.5 -3.5,3.5 H 5.55 Q 2,126 2,122.5 V 5.5 Q 2,2 5.55,2 H 122.5 M 6,6 V 122 H 122 V 6 H 6"
+     id="path34" />
+  <path
+     stroke="none"
+     fill="#4d5358"
+     d="M 6,6 H 122 V 122 H 6 V 6 M 120,8 H 8 V 98 H 120 V 8"
+     id="path36" />
+  <path
+     stroke="none"
+     fill="#303337"
+     d="M 120,8 V 98 H 8 V 8 h 112"
+     id="path38" />
+</svg>
