@@ -300,15 +300,7 @@ const equi = [
     "level": 3,
     "prix": 40,
     "img": 'bar.jpg',
-    "nb": 1,
-    "type": "service"
-  },
-  {
-    "title": "Bar",
-    "level": 3,
-    "prix": 40,
-    "img": 'bar.jpg',
-    "nb": 1,
+    "nb": 2,
     "type": "service"
   },
   {
