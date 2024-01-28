@@ -1,6 +1,35 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
+test('regle', async ({ page }) => {
+  await page.setViewportSize({ 'width': 720, 'height': 1080 })
+  await page.goto("file://" + __dirname + "/../regle.html");
+  let cpt = 0;
+
+  for (let cpt = 0; cpt < 8; cpt++) {
+    await page.screenshot({ path: 'cards/regle' + cpt + '.png', type: 'png' });
+    cpt++;
+  }
+});
+
+
+test('event', async ({ page }) => {
+  await page.setViewportSize({ 'width': 720, 'height': 1080 })
+  await page.goto("file://" + __dirname + "/../event.html");
+  const content = await page.content()
+  let cpt = 0;
+
+  for (const card of events) {
+    await page.setContent(content
+      .replace('$text', card.text.toLowerCase())
+    )
+
+    // Expect a title "to contain" a substring.
+    await page.screenshot({ path: 'cards/event' + cpt + '.png', type: 'png' });
+    cpt++;
+  }
+});
+
 test('objectifs', async ({ page }) => {
   await page.setViewportSize({ 'width': 720, 'height': 1080 })
   await page.goto("file://" + __dirname + "/../objectif.html");
@@ -130,32 +159,49 @@ const colorMusic = '#dcbd61';
 const colorDanse = '#e138ee';
 const colorClown = '#ba9976';
 
+const events = [
+  { "text": "La ville prete le petit train, accessibilite +1" },
+  { "text": "Une manifestation qui bloque les bus accessibilite -1" },
+  { "text": "Marie a encore perdu toute ses affaires" },
+  { "text": "Agression sexuelle, un artiste au choix ne vient pas, les etoiles sont supprimees" },
+  { "text": "Philippe Etchebest, musicien 3 etoiles vient faire un feat sans prévenir" },
+  { "text": "Greve du personne, essentiel -1" },
+  { "text": "Green walk organisee par les festivaliers, essentiel +1" },
+  { "text": "Des kines font une animation gratuite, service +1" },
+  { "text": "Defaut de fabrication sur les preservatifs, service -1" },
+  { "text": "Punaise de lit dans les fauteuils, service -1" },
+  { "text": "Operation casquette, service +1" },
+  { "text": "Grand soleil, +3 points de victoire" },
+  { "text": "Avis de tempete, -3 points de victoire" },
+]
+
 const actions = [
-  { "text": "Peut racheter un artiste a un autre joueur, au double du prix minimum" },
-  { "text": "Peut voler un equipement a un autre joueur" },
+  { "text": "Peut racheter un artiste à un autre joueur, au double du prix minimum" },
+  { "text": "Peut voler un equipement à un autre joueur" },
   { "text": "Empoisonner l'eau, -1 essentiel" },
   { "text": "Laxatifs dans la nourriture, detruit un equipement toilettes" },
-  { "text": "Bus en panne, -1 accessibilite" },
-  { "text": "Preavis de greve, -1 accessibilite +1 service" },
+  { "text": "Bus en panne, -1 accessibilité" },
+  { "text": "Preavis de greve, -1 accessibilité +1 service" },
   { "text": "Boules puantes, -1 service" },
   { "text": "Chaises low cost, -1 service" },
   { "text": "Ingenieur du son en stage, -1 essentiel -1 service" },
   { "text": "mauvaise pub, -10 visiteurs" },
   { "text": "attaque informatique, -1 essentiel" },
-  { "text": "coupure d’eau, detruit equipement 1 eau et 1 toilette + 1 service" },
+  { "text": "coupure d’eau, detruit un équipement eau et 1 toilette + 1 service" },
   { "text": "redressement fiscal, -100 argent" },
   { "text": "Destruction de la biere, -1 service" },
   { "text": "Merchs et goodies, +50 argent" },
   { "text": "Marketing, +10 visiteurs" },
-  { "text": "Tonnelle, +50 capacite" },
+  { "text": "Tonnelle, +50 capacité" },
   { "text": "preventes, +100 argent" },
   { "text": "cashless, +50 argent +1 service" },
   { "text": "sponsors, +50 argent" },
-  { "text": "drogues, +2 etoile a un artiste" },
-  { "text": "polemique, -2 etoile a un artiste -10 visiteurs" },
+  { "text": "drogues, +2 etoile à un artiste" },
+  { "text": "polemique, -2 etoile à un artiste -10 visiteurs" },
   { "text": "cocaine achète un clown -50%" },
   { "text": "concorde : emprunter le Phil Collins d'Alaska d'un autre joueur, partager les etoiles (4/1) et beneficier des mêmes visiteurs" },
 ]
+
 const objectifs = [
   {
     "text": "Avoir 5 artistes de categorie differentes"
@@ -254,7 +300,15 @@ const equi = [
     "level": 3,
     "prix": 40,
     "img": 'bar.jpg',
-    "nb": 2,
+    "nb": 1,
+    "type": "service"
+  },
+  {
+    "title": "Bar",
+    "level": 3,
+    "prix": 40,
+    "img": 'bar.jpg',
+    "nb": 1,
     "type": "service"
   },
   {
@@ -401,7 +455,7 @@ const artistes = [
     "pop": 18,
     "prix": 120,
     "img": 'jdg.webp',
-    "text": "Avant il etait drole"
+    "text": "Avant il était drole"
   }, {
     "back": colorHumour,
     "title": "Baptiste lecavide",
@@ -409,7 +463,7 @@ const artistes = [
     "pop": 15,
     "prix": 60,
     "img": 'caplain.webp',
-    "text": "Il a trompe sa femme"
+    "text": "Il a trompé sa femme"
   }, {
     "back": colorHumour,
     "title": "Gadel Mamel",
@@ -422,15 +476,15 @@ const artistes = [
     "back": colorHumour,
     "title": "Mcflurry et Calypso",
     "level": 1,
-    "pop": 12,
+    "pop": 14,
     "prix": 80,
     "img": 'mcfly.webp',
     "text": "Parait qu'ils sont droles"
   }, {
     "back": colorHumour,
     "title": "Paul Nectarine",
-    "level": 2,
-    "pop": 6,
+    "level": 3,
+    "pop": 11,
     "prix": 50,
     "img": 'mirabel.jpg',
     "text": "Salam les khoyas"
@@ -441,7 +495,7 @@ const artistes = [
     "pop": 4,
     "prix": 20,
     "img": 'morteau.webp',
-    "text": "Notre reference locale"
+    "text": "Notre référence locale"
   }, {
     "back": colorHumour,
     "title": "Salade Grecos",
@@ -451,10 +505,18 @@ const artistes = [
     "img": 'nikos.webp',
     "text": "Pile +2 ou face -2 visiteurs"
   }, {
+    "back": colorHumour,
+    "title": "Lerat Fabian",
+    "level": 5,
+    "pop": 7,
+    "prix": 70,
+    "img": 'fabian.webp',
+    "text": "Risque de s'endormir à tout moment"
+  }, {
     "back": colorMagicien,
     "title": "Fabien Olibus",
     "level": 2,
-    "pop": 2,
+    "pop": 7,
     "prix": 20,
     "img": 'fabien.webp',
     "text": "Pioche une carte action"
@@ -478,7 +540,7 @@ const artistes = [
     "back": colorMagicien,
     "title": "David Ironfield",
     "level": 5,
-    "pop": 14,
+    "pop": 16,
     "prix": 200,
     "img": 'copperfield.webp',
     "text": "Pioche une carte action"
@@ -494,10 +556,18 @@ const artistes = [
     "back": colorMagicien,
     "title": "Harry Ouistiti",
     "level": 3,
-    "pop": 3,
+    "pop": 5,
     "prix": 40,
     "img": 'oudini.webp',
     "text": "Pioche une carte action"
+  }, {
+    "back": colorMagicien,
+    "title": "Tibo le Magnifique",
+    "level": 2,
+    "pop": 35,
+    "prix": 80,
+    "img": 'tibo.jpg',
+    "text": "Mais qu'il est beau"
   }, {
     "back": colorMusic,
     "title": "Phil Collin D'Alaska",
@@ -510,7 +580,7 @@ const artistes = [
     "back": colorMusic,
     "title": "BigMc et Orly",
     "level": 4,
-    "pop": 17,
+    "pop": 19,
     "prix": 120,
     "img": 'bigflo.webp',
     "text": "Lezgongue"
@@ -526,7 +596,7 @@ const artistes = [
     "back": colorMusic,
     "title": "David Guetto",
     "level": 2,
-    "pop": 15,
+    "pop": 16,
     "prix": 150,
     "img": 'guetta.webp',
     "text": "Bip Boup Boup"
@@ -534,15 +604,24 @@ const artistes = [
     "back": colorMusic,
     "title": "Dacia",
     "level": 1,
-    "pop": 5,
+    "pop": 8,
     "prix": 60,
     "img": 'renaud.webp',
     "text": "Vient avec l'alcool +1 service"
+  },
+  {
+    "back": colorMusic,
+    "title": "Marie Vianney",
+    "level": 2,
+    "pop": 35,
+    "prix": 80,
+    "img": 'meuveu.jpg',
+    "text": "Musique, danse, chant et maths, elle sait tout faire"
   }, {
     "back": colorDanse,
     "title": "Nicopalas Lengrand",
     "level": 3,
-    "pop": 5,
+    "pop": 7,
     "prix": 50,
     "img": 'nico.webp',
     "text": "Le meilleur"
@@ -553,7 +632,7 @@ const artistes = [
     "pop": 15,
     "prix": 120,
     "img": 'minnet.png',
-    "text": "Irresistible d'après ma femme"
+    "text": "Irrésistible d'après ma femme"
   }, {
     "back": colorDanse,
     "title": "Pierre Malade",
@@ -574,7 +653,7 @@ const artistes = [
     "back": colorDanse,
     "title": "Tigre Camion",
     "level": 2,
-    "pop": 8,
+    "pop": 10,
     "prix": 60,
     "img": 'fauve.webp',
     "text": "La meilleure danseuse"
@@ -595,13 +674,21 @@ const artistes = [
     "img": 'ladesou.webp',
     "text": "Une voix reconnaissable"
   }, {
+    "back": colorDanse,
+    "title": "Smostache Ravie",
+    "level": 2,
+    "pop": 35,
+    "prix": 80,
+    "img": 'smo.jpeg',
+    "text": "Une voix reconnaissable"
+  }, {
     "back": colorClown,
     "title": "Gerard & Gerald",
     "level": 3,
     "pop": 5,
     "prix": 50,
     "img": 'gerard-merged.png',
-    "text": "Difficile a gerer, necessaire -1"
+    "text": "Insortables, nécessaire -1"
   }, {
     "back": colorClown,
     "title": "AOC",
@@ -620,9 +707,17 @@ const artistes = [
     "text": "Pioche une carte Action"
   }, {
     "back": colorClown,
+    "title": "Chris Potdefleur",
+    "level": 2,
+    "pop": 25,
+    "prix": 70,
+    "img": 'chris.jpg',
+    "text": "Ramene du poulet, +1 service"
+  }, {
+    "back": colorClown,
     "title": "Jean Luc Melengeons",
     "level": 3,
-    "pop": 10,
+    "pop": 14,
     "prix": 60,
     "img": 'jl.webp',
     "text": "Il parle bien quand meme"
@@ -633,12 +728,12 @@ const artistes = [
     "pop": 10,
     "prix": 150,
     "img": 'balkany.webp',
-    "text": "Toujours dans les bons coups, services +1"
+    "text": "Toujours dans les bons coups, service +1"
   }, {
     "back": colorClown,
     "title": "Marlene Chepas",
     "level": 1,
-    "pop": 2,
+    "pop": 4,
     "prix": 10,
     "img": 'chepa.webp',
     "text": "Au courant de rien"
@@ -646,7 +741,7 @@ const artistes = [
     "back": colorClown,
     "title": "Valerie Pacrette",
     "level": 2,
-    "pop": 8,
+    "pop": 10,
     "prix": 20,
     "img": 'pecresse.webp',
     "text": "Debout !"
@@ -661,7 +756,7 @@ const artistes = [
     "pop": 6,
     "prix": 80,
     "img": 'patoche.webp',
-    "text": "1 Patoche 1 etoile, 2 Patoche 2 etoiles ..."
+    "text": "1 Patoche 1 étoile, 2 Patoche 2 étoiles ..."
   },
   {
     "back": colorDanse,
@@ -670,7 +765,7 @@ const artistes = [
     "pop": 6,
     "prix": 80,
     "img": 'patoche.webp',
-    "text": "1 Patoche 1 etoile, 2 Patoche 2 etoiles ..."
+    "text": "1 Patoche 1 étoile, 2 Patoche 2 étoiles ..."
   },
   {
     "back": colorMusic,
@@ -679,7 +774,7 @@ const artistes = [
     "pop": 6,
     "prix": 80,
     "img": 'patoche.webp',
-    "text": "1 Patoche 1 etoile, 2 Patoche 2 etoiles ..."
+    "text": "1 Patoche 1 étoile, 2 Patoche 2 étoiles ..."
   },
   {
     "back": colorMagicien,
@@ -688,7 +783,7 @@ const artistes = [
     "pop": 6,
     "prix": 80,
     "img": 'patoche.webp',
-    "text": "1 Patoche 1 etoile, 2 Patoche 2 etoiles ..."
+    "text": "1 Patoche 1 étoile, 2 Patoche 2 étoiles ..."
   },
   {
     "back": colorHumour,
@@ -697,6 +792,15 @@ const artistes = [
     "pop": 6,
     "prix": 80,
     "img": 'patoche.webp',
-    "text": "1 Patoche 1 etoile, 2 Patoche 2 etoiles ..."
+    "text": "1 Patoche 1 étoile, 2 Patoche 2 étoiles ..."
+  },
+  {
+    "back": colorClown,
+    "title": "Brono",
+    "level": 5,
+    "pop": 5,
+    "prix": 70,
+    "img": 'bruno.jpg',
+    "text": "Drole ? on sait pas trop"
   }
 ]
